@@ -1,20 +1,17 @@
 package main
 
 import (
+	"github.com/daken04/Event-Booking-REST-API/routes"
+	"github.com/daken04/Event-Booking-REST-API/db"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func main(){
+	db.InitDB()
 	server := gin.Default()
 
-	server.GET("/events", getEvents)
+	routes.RegisterRoutes(server)
 
-	server.Run()
+	server.Run(":8080") //localhost:8080
 }
 
-func getEvents(context *gin.Context){
-	context.JSON(http.StatusOK,gin.H{
-		"Message":"Hello",
-	})
-}
